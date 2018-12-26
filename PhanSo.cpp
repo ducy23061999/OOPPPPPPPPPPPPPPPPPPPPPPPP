@@ -6,6 +6,7 @@ class PhanSo{
             PhanSo tru(PhanSo p);
             PhanSo nhan(PhanSo p);
             PhanSo chia(PhanSo p);
+            int UCLN(int m, int n);
             void nhap();
             void xuat();
 };
@@ -33,11 +34,31 @@ PhanSo PhanSo::chia(PhanSo p){
     result.mau = this->mau * p.tu;
     return result;
 }
+int PhanSo::UCLN(int m, int n){
+    m = abs(m);
+    n = abs(n);
+    if(m == 0 || n == 0) return m + n;
+    while( m != n){
+        if(m < n) n -= m;
+        else m -= n;
+    }
+    return m;
+}
 void PhanSo::nhap(){
     cin >> this->tu >> this->mau;
+    if(this->mau == 0) {
+        cout << "Phan so khong hop le" << endl;
+    }
 }
 void PhanSo::xuat(){
-    cout << endl << this->tu << "/"<< this->mau<<endl;
+    if(this->mau == 0) {
+        cout << "Phan so khong hop le" << endl;
+    }
+    else {
+        int UCLN = this->UCLN(this->tu, this->mau);
+        if(this->mau < 0) UCLN = (-1) * UCLN;
+        cout << endl << this->tu/UCLN << "/"<< this->mau/UCLN<<endl;
+    }
 }
 int main(){
     PhanSo a,b,c;
