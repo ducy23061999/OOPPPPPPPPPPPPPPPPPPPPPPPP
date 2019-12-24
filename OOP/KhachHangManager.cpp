@@ -103,8 +103,7 @@ void L::ChenCuoi(KhachHang *node){
         }
         p->next = node;
     }
-    
-    
+
 }
 void L::nhap(){
     do{

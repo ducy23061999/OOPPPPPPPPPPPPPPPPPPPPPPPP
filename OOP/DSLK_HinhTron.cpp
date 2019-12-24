@@ -70,7 +70,7 @@ QuanLi::QuanLi(){
 void QuanLi::nhap(){
     int dem = 0;
     do{
-        if (dem >= 3) break;
+        if (dem == 3) break;
         HinhTron *node = new HinhTron();
         node->nhap();
         if (first == NULL)
@@ -98,12 +98,16 @@ void QuanLi::sapxep(){
         {
             // sap xep giam dan theo toa do x. 
             if (q->getX() < p->getX()){
-                // temp = q
-                HinhTron temp(q->getX(),q->getY(),q->getR());
-                // q = p
-                q->setAllProperties(p->getX(),p->getY(),p->getR());
-                // p = temp;
-                p->setAllProperties(temp.getX(),temp.getY(),temp.getR());
+            
+                // temp = q;
+                // HinhTron temp(q->getX(),q->getY(),q->getR());
+                // // q = p
+                // q->setAllProperties(p->getX(),p->getY(),p->getR());
+                // // p = temp;
+                // p->setAllProperties(temp.getX(),temp.getY(),temp.getR());
+                HinhTron temp= *(p);
+                *p = *q;
+                *q = temp;
             }
         }
 }

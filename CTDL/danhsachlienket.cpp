@@ -105,12 +105,114 @@ void xoaAll(Nut *&f, int x) {
         }
     }
 }
+void BSCuoi(Nut *&f, int X) {
+    if (f == NULL) {
+        f = new Nut;
+        f->info  = X;
+        f->next = NULL;
+    } else {
+        BSCuoi(f->next, X);
+    }
+}
+void XoaCuoi(Nut *&f) {
+    if (f != NULL) {
+        if (f->next == NULL) {
+            delete f;
+            f = NULL;
+        } else {
+            XoaCuoi(f->next);
+        }
+    }
+}
+Nut *timDSChuaDuocSapXep(Nut *f, int x) {
+    if (f != NULL) {
+        if (f->info == x) {
+            return f;
+        } else {
+            return timDSChuaDuocSapXep(f->next, x);
+        }
+    } else {
+        return NULL;
+    }
+}
+Nut *timDSDaDuocSapXep(Nut *f, int x) {
+    if (f == NULL || x < f->info)
+        return NULL;
+     if (f->info == x) {
+            return f;
+     } else {
+            return timDSChuaDuocSapXep(f->next, x);
+     }
+}
+void SaoChep(Nut *F, Nut *&L) {
+    if (F == NULL) {
+        L == NULL;
+    } else {
+        L = new Nut;
+        L->info = F->info;
+        SaoChep(F->next, L->next);
+    }
+    
+}
+void GiaoHaiDanhSach(Nut *F1, Nut *F2, Nut *&F3) {
+   if (F1 != NULL && F2 != NULL) {
+       if (F1->info == F2->info) {
+           F3 = new Nut;
+           F3->info = F1->info;
+           GiaoHaiDanhSach(F1->next, F2->next, F3->next);
+       } else {
+           if (F1->info < F2->info) {
+               GiaoHaiDanhSach(F1->next, F2, F3);
+            
+           } else 
+                GiaoHaiDanhSach(F1, F2->next, F3);
+       }
+       
+   } else {
+       F3 = NULL;
+   }
+}
+
+void HopHaiDanhSach(Nut *F1, Nut *F2, Nut *&F3) {
+    if (F1 != NULL && F2 != NULL) {
+        if (F1->info == F2->info) {
+            F3 = new Nut;
+            F3->info = F1->info;
+            HopHaiDanhSach(F1->next, F2->next, F3->next);
+        } else {
+            if (F1->info < F2->info) {
+                F3 = new Nut;
+                F3->info = F1->info;
+                HopHaiDanhSach(F1->next, F2, F3->next);
+            } else {
+                F3 = new Nut;
+                F3->info = F2->info;
+                HopHaiDanhSach(F1, F2->next, F3->next);
+            }
+        }
+    } else {
+        if (F1 == NULL && F2 != NULL) {
+            SaoChep(F2, F3);
+        } 
+        if (F2 == NULL && F1 != NULL) {
+            SaoChep(F1, F3);
+        }
+    }
+}
+
 int main() {
     Nut *f = NULL;
-    nhap(f);
+    // nhap(f);
+    cout << "??";
     // xuat(f);
-    // insertData(f,3);
-    xoa(f,3);
+    insertData(f,3);
+    insertData(f,4);
+    insertData(f,5);
+    insertData(f,6);
+    insertData(f,7);
+    insertData(f,8);
+    insertData(f,10);
+    BSCuoi(f, 10);
     // xoaAll(f,3);
     xuat(f);
     return 0;
